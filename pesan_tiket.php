@@ -27,52 +27,23 @@
 <div align="center"><img src="siptbus.png" height="300"></div>
 
 <div align="center">
-    <form action="profile.php" method="post">
-      Masukkan Nomor KTP anda :
-        <br>            
+    <form action="pesan_tiket.php" method="post">
+        Nomor Kursi
+        <input type="text" name="nokur" placeholder="ex : 12B">
+        Nomor KTP
         <input type="text" name="noktp">
+        Kode Jadwal
+        <input type="text" name="kojad">
         <br><br>
-        <input class="btn btn-primary" type="submit" value="Cari">
-        <br>
-        atau
-    </form>
-    <form action="buat.php" method="post">
-      <input class="btn btn-success" type="submit" value="Buat Akun">
+        <input type="submit" value="Pesan">
     </form>
 </div>
 
 <?php
 $host=mysqli_connect("localhost","root","","siptb");
+$nokur=$_POST['nokur'];
 $noktp=$_POST['noktp'];
+$kojad=$_POST['kojad'];
 
-$profil = mysqli_query($host, "select * from konsumen where no_ktp = '$noktp'");
-
-echo "<table class='table'>";
-echo "<thead class='thead-dark'>
-      <tr align='center'>
-        <th>Nama Konsumen</th>
-        <th>Email</th>
-        <th>Jenis Kelamin</th>
-        <th>Tempat Lahir</th>
-        <th>Tanggal Lahir</th>
-        <th>Nomor KTP</th>
-        <th>Alamat</th>
-        <th>Nomor HP</th>
-      </tr>
-      </thead>";
-while($row=mysqli_fetch_assoc($profil)){
-    echo "<tr align='center'>
-            <td>".$row['namaKonsumen']."</td>
-            <td>".$row['email']."</td>
-            <td>".$row['jenisKelamin']."</td>
-            <td>".$row['tempatLahir']."</td>
-            <td>".$row['tanggalLahir']."</td>
-            <td>".$row['no_ktp']."</td>
-            <td>".$row['alamat']."</td>
-            <td>".$row['no_hp']."</td>
-            </tr>";
-    echo "<br>";
-}
-echo "</table>";
-
+mysqli_query($host, "insert into tiket values ('', '$nokur', '$noktp', '$kojad')");
 ?>

@@ -26,53 +26,37 @@
 </nav>
 <div align="center"><img src="siptbus.png" height="300"></div>
 
-<div align="center">
-    <form action="profile.php" method="post">
-      Masukkan Nomor KTP anda :
-        <br>            
-        <input type="text" name="noktp">
-        <br><br>
-        <input class="btn btn-primary" type="submit" value="Cari">
-        <br>
-        atau
-    </form>
-    <form action="buat.php" method="post">
-      <input class="btn btn-success" type="submit" value="Buat Akun">
+<div>
+    <h2 align="center">Buat Akun Siptibus</h2>
+    <form action="buat.php" method="POST">
+        <table border="0" align="center">
+            <tr><td>Nama </td><td><input type="text" name="nama" size="30"/></td></tr>
+            <tr><td>Email </td><td><input type="email" name="email" size="20"/></td></tr>
+            <tr><td>Jenis Kelamin </td><td><input type="text" name="jk" size="10"></td></tr>
+            <tr><td>Tempat Lahir </td><td><input type="text" name="tempatlahir" size="10"></td></tr>
+            <tr><td>Tanggal Lahir </td><td><input type="date" name="tanggal"></td></tr>
+            <tr><td>Nomor KTP </td><td><input type="text" name="noktp" size="10"></td></tr>
+            <tr><td>Alamat </td><td><textarea name="alamat" row="5" cols="31"></textarea></td></tr>
+            <tr><td>Nomor HP </td><td><input type="text" size="10" name="nohp"/></td></tr>
+            <tr><td></td><td><input class="btn btn-primary" type="submit" value="Submit" align="rigth"><input type="reset" class="btn btn-danger" Value="Clear" ></td></tr>
+        </table>
     </form>
 </div>
 
 <?php
 $host=mysqli_connect("localhost","root","","siptb");
+$nama=$_POST['nama'];
+$email=$_POST['email'];
+$jk=$_POST['jk'];
+$tempatlahir=$_POST['tempatlahir'];
+$tanggal=$_POST['tanggal'];
 $noktp=$_POST['noktp'];
+$alamat=$_POST['alamat'];
+$nohp=$_POST['nohp'];
 
-$profil = mysqli_query($host, "select * from konsumen where no_ktp = '$noktp'");
+$ins = mysqli_query($host, "insert into konsumen value('', '$nama', '$email', '$jk', '$tempatlahir',
+'$tanggal', '$noktp', '$alamat', '$nohp')");
 
-echo "<table class='table'>";
-echo "<thead class='thead-dark'>
-      <tr align='center'>
-        <th>Nama Konsumen</th>
-        <th>Email</th>
-        <th>Jenis Kelamin</th>
-        <th>Tempat Lahir</th>
-        <th>Tanggal Lahir</th>
-        <th>Nomor KTP</th>
-        <th>Alamat</th>
-        <th>Nomor HP</th>
-      </tr>
-      </thead>";
-while($row=mysqli_fetch_assoc($profil)){
-    echo "<tr align='center'>
-            <td>".$row['namaKonsumen']."</td>
-            <td>".$row['email']."</td>
-            <td>".$row['jenisKelamin']."</td>
-            <td>".$row['tempatLahir']."</td>
-            <td>".$row['tanggalLahir']."</td>
-            <td>".$row['no_ktp']."</td>
-            <td>".$row['alamat']."</td>
-            <td>".$row['no_hp']."</td>
-            </tr>";
-    echo "<br>";
-}
-echo "</table>";
+echo"Akun berhasil dibuat!";
 
 ?>

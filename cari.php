@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link active" href="pesan_tiket.html">Pesan Tiket<span class="sr-only">(current)</span></a>
+              <a class="nav-link active" href="pesan_tiket.php">Pesan Tiket<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="bayar.php">Bayar Tiket</a>
@@ -35,6 +35,7 @@ $info = mysqli_query($host, "select * from jadwal where tanggalBerangkat = '$tan
 echo "<div><h1>Informasi Jadwal Bus</h1></div>";
 echo "<table border=1>";
 echo "<tr>
+        <td>Kode</td>
         <td>Nama Armada</td>
         <td>Tanggal Berangkat</td>
         <td>Kota Asal</td>
@@ -44,6 +45,7 @@ echo "<tr>
         <td>Nomor Armada</td>";
 while($row=mysqli_fetch_assoc($info)){
     echo "<tr>
+            <td>".$row['kodeJadwal']."</td>
             <td>".$row['namaArmada']."</td>
             <td>".$row['tanggalBerangkat']."</td>
             <td>".$row['kotaAsal']."</td>
