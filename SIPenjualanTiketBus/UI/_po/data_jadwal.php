@@ -28,19 +28,19 @@
         require '../../DB/conn.php';
         $no = 1;
         $jadwal = mysqli_query($host, "SELECT * FROM jadwal");
-        while($d = mysqli_fetch_array($jadwal)){
+        while($d = mysqli_fetch_assoc($jadwal)){
       ?>
           <tr align="center">
             <td><?php echo $no++; ?></td>
-            <td><?php echo $d['namaArmada']; ?></td>
-            <td><?php echo $d['tanggalBerangkat']; ?></td>
-            <td><?php echo $d['kotaAsal']; ?></td>
-            <td><?php echo $d['kotaTujuan']; ?></td>
-            <td><?php echo $d['jamBerangkat']; ?></td>
-            <td><?php echo $d['no_armada']; ?></td>
-            <td><?php echo $d['harga']; ?></td>
+            <td name="namaArmada"><?php echo $d['namaArmada']; ?></td>
+            <td normalizer_is_normalized="tglBerangkat"><?php echo $d['tanggalBerangkat']; ?></td>
+            <td id="kotaAsal"><?php echo $d['kotaAsal']; ?></td>
+            <td id="kotaTujuan"><?php echo $d['kotaTujuan']; ?></td>
+            <td id="jamBerangkat"><?php echo $d['jamBerangkat']; ?></td>
+            <td id="noArmada"><?php echo $d['no_armada']; ?></td>
+            <td id="harga"><?php echo $d['harga']; ?></td>
             <td>
-              <a href="edit.php?id=<?php echo $d['kodeJadwal']; ?>">EDIT</a>
+              <a href="editForm.php?id=<?php echo $d['kodeJadwal']; ?>">EDIT</a>
               <a href="hapus.php?id=<?php echo $d['kodeJadwal']; ?>">HAPUS</a>
             </td>
           </tr>
