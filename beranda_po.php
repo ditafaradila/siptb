@@ -10,20 +10,23 @@
 
     <nav class="navbar navbar-expand-lg" style="background-color: #F4EEB1;">
         <img src="pngegg.png" height="80">
-        <a class="navbar-brand" href="beranda.html">Beranda</a>
+        <a class="navbar-brand" href="beranda_po.html">Beranda</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link active" href="pesan_tiket.php">Pesan Tiket</a>
+              <a class="nav-link active" href="data_transaksi.php">Data Transaksi</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="bayar.php">Bayar Tiket</a>
+              <a class="nav-link active" href="data_jadwal.php">Jadwal Bus</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="profile.php">Profile</a>
+              <a class="nav-link active" href="data_armada.php">Data Armada</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="profile_po.php">Profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="login.html">Logout</a>
@@ -31,29 +34,41 @@
           </ul>
         </div>
     </nav>
-
-    <div align="center"><img src="siptbus.png" height="300"></div>
-    <div >
-      <h1 align="center">Cari Tiket</h1>
-    </div>
-    <div align="center">
-      <form action="cari.php" method="post">
-          Tanggal Berangkat
-          <br>            
-          <input type="date" name="tanggal">
-          <br>
-          Kota Asal
-          <br>       
-          <input type="text" name="asal">
-          <br>
-          Kota Tujuan
-          <br>    
-          <input type="text" name="tujuan">
-          <br>
-          <br>
-          <input type="submit" value="cari">
-      </form>
-    </div>
-
 </body>
 </html>
+
+<?php
+$host=mysqli_connect("localhost","root","","siptb");
+
+$laporan = mysqli_query($host, "SELECT id_transaksi, namaKonsumen, jumlahPembayaran, jenisTransaksi, tanggalPembayaran
+ FROM `transaksi`");
+
+echo "<div class='alert alert-primary' role='alert' align='center'><h1> Laporan Pemesanan Tiket Bus </h1></div>";
+echo "<table class='table'>";
+echo "<thead class='thead-dark'>
+      <tr align='center'>
+        <th>Kode Transaksi</th>
+        <th>Nama Konsumen</th>
+        <th>Jumlah Pembayaran</th>
+        <th>Jenis Pembayaran</th>
+        <th>Tanggal Bayar</th>
+      </tr>
+      </thead>";
+
+while($row=mysqli_fetch_assoc($laporan)){
+    echo "<tr align='center'>
+            <td>".$row['id_transaksi']."</td>
+            <td>".$row['namaKonsumen']."</td>
+            <td>".$row['jumlahPembayaran']."</td>
+            <td>".$row['jenisTransaksi']."</td>
+            <td>".$row['tanggalPembayaran']."</td>
+            </tr>";
+    echo "<br>";
+}
+echo "</table>";
+
+$queryy = mysqli_query($host, "SELECT SUM(jumlahPembayaran) FROM transaksi");
+$total = mysqli_fetch_array($queryy);
+echo $total;
+
+?>

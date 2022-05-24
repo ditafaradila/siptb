@@ -6,6 +6,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
 <nav class="navbar navbar-expand-lg" style="background-color: #F4EEB1;">
+    <img src="pngegg.png" height="80">    
     <a class="navbar-brand" href="beranda.html">Beranda</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -32,6 +33,7 @@
         <table border="0" align="center">
             <tr><td>Nama </td><td><input type="text" name="nama" size="30"/></td></tr>
             <tr><td>Email </td><td><input type="email" name="email" size="20"/></td></tr>
+            <tr><td>Password </td><td><input type="password" name="password" size="20"/></td></tr>
             <tr><td>Jenis Kelamin </td><td><input type="text" name="jk" size="10"></td></tr>
             <tr><td>Tempat Lahir </td><td><input type="text" name="tempatlahir" size="10"></td></tr>
             <tr><td>Tanggal Lahir </td><td><input type="date" name="tanggal"></td></tr>
@@ -45,8 +47,10 @@
 
 <?php
 $host=mysqli_connect("localhost","root","","siptb");
+
 $nama=$_POST['nama'];
 $email=$_POST['email'];
+$password=$_POST['password'];
 $jk=$_POST['jk'];
 $tempatlahir=$_POST['tempatlahir'];
 $tanggal=$_POST['tanggal'];
@@ -54,7 +58,7 @@ $noktp=$_POST['noktp'];
 $alamat=$_POST['alamat'];
 $nohp=$_POST['nohp'];
 
-$ins = mysqli_query($host, "insert into konsumen value('', '$nama', '$email', '$jk', '$tempatlahir',
+$ins = mysqli_query($host, "insert into konsumen value('$password', '$nama', '$email', '$jk', '$tempatlahir',
 '$tanggal', '$noktp', '$alamat', '$nohp')");
 
 echo"Akun berhasil dibuat!";
