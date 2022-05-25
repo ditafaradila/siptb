@@ -35,43 +35,34 @@
         </div>
     </nav>
 
-  <div>
-    <div class='alert alert-primary' role='alert' align='center'><h1> DATA ARMADA </h1></div>
     <div>
-    <form action="tambah_armada.php" method="post">
-      <input class="btn btn-success" type="submit" value="Tambah Data Armada">
+    <h2 align="center">Tambah Jadwal</h2>
+    <form action="tambah_jadwal.php" method="POST">
+        <table border="0" align="center">
+            <tr><td>Nama Armada </td><td><input type="text" name="namaArmada" size="20"/></td></tr>
+            <tr><td>Tanggal Berangkat </td><td><input type="date" name="tanggalBerangkat" row="5" cols="31"></textarea></td></tr>
+            <tr><td>Kota Asal </td><td><input type="text" size="20" name="kotaAsal"/></td></tr>
+            <tr><td>Kota Tujuan </td><td><input type="text" size="20" name="kotaTujuan"/></td></tr>
+            <tr><td>Jam Berangkat </td><td><input type="time" size="10" name="jamBerangkat"/></td></tr>
+            <tr><td>Nomor Armada </td><td><input type="text" size="10" name="no_armada"/></td></tr>
+            <tr><td>Harga </td><td><input type="text" size="10" name="harga"/></td></tr>
+            <tr><td></td><td><input class="btn btn-primary" type="submit" value="Submit" align="rigth"><input type="reset" class="btn btn-danger" Value="Clear" ></td></tr>
+        </table>
     </form>
-    </div>
-    <table table class="table">
-      <thead class="thead-dark">
-      <tr align="center">
-        <th>No</th>
-        <th>Nama Armada</th>
-        <th>Jenis Bus</th>
-        <th>Jumlah Kursi</th>
-        <th>ID PO</th>
-      </tr>
-
-      <?php 
-        $host=mysqli_connect("localhost","root","","siptb");
-        $armada = mysqli_query($host, "SELECT * FROM armada");
-        while($d = mysqli_fetch_array($armada)){
-      ?>
-          <tr align="center">
-            <td><?php echo $d['no_armada']; ?></td>
-            <td><?php echo $d['namaArmada']; ?></td>
-            <td><?php echo $d['jenisBus']; ?></td>
-            <td><?php echo $d['jumlahKursi']; ?></td>
-            <td><?php echo $d['id_PO']; ?></td>
-            <td>
-              <a href="edit_armada.php?id=<?php echo $d['no_armada']; ?>">EDIT</a>
-              <a href="hapus_armada.php?id=<?php echo $d['no_armada']; ?>">HAPUS</a>
-            </td>
-          </tr>
-          <?php 
-            }
-          ?>
-    </table>
-  </div>
+</div>
 </body>
 </html>
+
+<?php
+$host=mysqli_connect("localhost","root","","siptb");
+
+$namaArmada=$_POST['namaArmada'];
+$tanggalBerangkat=$_POST['tanggalBerangkat'];
+$kotaAsal=$_POST['kotaAsal'];
+$kotaTujuan=$_POST['kotaTujuan'];
+$jamBerangkat=$_POST['jamBerangkat'];
+$no_armada=$_POST['no_armada'];
+$harga=$_POST['harga'];
+
+mysqli_query($host, "insert into jadwal value('', '$namaArmada', '$tanggalBerangkat', '$kotaAsal', '$kotaTujuan', '$jamBerangkat', '$no_armada', '$harga')");
+?>

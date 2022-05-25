@@ -35,43 +35,28 @@
         </div>
     </nav>
 
-  <div>
-    <div class='alert alert-primary' role='alert' align='center'><h1> DATA ARMADA </h1></div>
     <div>
-    <form action="tambah_armada.php" method="post">
-      <input class="btn btn-success" type="submit" value="Tambah Data Armada">
+    <h2 align="center">Tambah Jadwal</h2>
+    <form action="tambah_armada.php" method="POST">
+        <table border="0" align="center">
+            <tr><td>Nama Armada </td><td><input type="text" name="namaArmada" size="20"/></td></tr>
+            <tr><td>Jenis Bus </td><td><input type="text" name="jenisBus" size="15"></textarea></td></tr>
+            <tr><td>Jumlah Kursi</td><td><input type="text" size="5" name="jumlahKursi"/></td></tr>
+            <tr><td>ID PO </td><td><input type="text" size="20" name="id_PO"/></td></tr>
+            <tr><td></td><td><input class="btn btn-primary" type="submit" value="Submit" align="rigth"><input type="reset" class="btn btn-danger" Value="Clear" ></td></tr>
+        </table>
     </form>
-    </div>
-    <table table class="table">
-      <thead class="thead-dark">
-      <tr align="center">
-        <th>No</th>
-        <th>Nama Armada</th>
-        <th>Jenis Bus</th>
-        <th>Jumlah Kursi</th>
-        <th>ID PO</th>
-      </tr>
-
-      <?php 
-        $host=mysqli_connect("localhost","root","","siptb");
-        $armada = mysqli_query($host, "SELECT * FROM armada");
-        while($d = mysqli_fetch_array($armada)){
-      ?>
-          <tr align="center">
-            <td><?php echo $d['no_armada']; ?></td>
-            <td><?php echo $d['namaArmada']; ?></td>
-            <td><?php echo $d['jenisBus']; ?></td>
-            <td><?php echo $d['jumlahKursi']; ?></td>
-            <td><?php echo $d['id_PO']; ?></td>
-            <td>
-              <a href="edit_armada.php?id=<?php echo $d['no_armada']; ?>">EDIT</a>
-              <a href="hapus_armada.php?id=<?php echo $d['no_armada']; ?>">HAPUS</a>
-            </td>
-          </tr>
-          <?php 
-            }
-          ?>
-    </table>
-  </div>
+</div>
 </body>
 </html>
+
+<?php
+$host=mysqli_connect("localhost","root","","siptb");
+
+$namaArmada=$_POST['namaArmada'];
+$jenisBus=$_POST['jenisBus'];
+$jumlahKursi=$_POST['jumlahKursi'];
+$id_PO=$_POST['id_PO'];
+
+mysqli_query($host, "insert into armada value('', '$namaArmada', '$jenisBus', '$jumlahKursi', '$id_PO')");
+?>
