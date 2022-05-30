@@ -65,12 +65,10 @@
                       </tr>";
               echo "<br>";
           }
-          echo "</table>";
-
-          $queryy = mysqli_query($host, "SELECT SUM(jumlahPembayaran) FROM transaksi");
-          $total = mysqli_fetch_array($queryy);
-          echo $total;
         ?>
     </div>
+    <script>
+        window.print();
+    </script>
 </body>
 </html>
