@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<?php require 'navbar_po.php'; ?>
+<?php 
+require 'navbar_po.php'; 
+session_start();
+?>
 </html>
 
 <?php
 require '../../DB/conn.php';
-
+$idpo = $_SESSION['id_po'];
 $laporan = mysqli_query($host, "SELECT id_transaksi, namaKonsumen, jumlahPembayaran, jenisTransaksi, tanggalPembayaran
- FROM `transaksi`");
+ FROM `transaksi");
 
 echo "<div class='alert alert-primary' role='alert' align='center'><h1> Laporan Pemesanan Tiket Bus </h1></div>";
 echo "<div>

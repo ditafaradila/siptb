@@ -27,13 +27,13 @@ $sql2 = "CREATE TABLE IF NOT EXISTS jadwal (
   )";
 
 $sql3 = "CREATE TABLE IF NOT EXISTS konsumen (
-    passwords varchar(11) NOT NULL PRIMARY KEY,
+    passwords varchar(11) NOT NULL,
     namaKonsumen varchar(50) NOT NULL,
     email varchar(25) NOT NULL,
     jenisKelamin varchar(10) NOT NULL,
     tempatLahir varchar(20) NOT NULL,
     tanggalLahir date NOT NULL,
-    no_ktp varchar(20) NOT NULL,
+    no_ktp varchar(20) NOT NULL PRIMARY KEY,
     alamat varchar(50) NOT NULL,
     no_hp varchar(15) NOT NULL
   )";
@@ -98,7 +98,20 @@ $sql11 = "ALTER TABLE `jadwal`
 $sql12 = "ALTER TABLE `transaksi`
     ADD UNIQUE KEY IF NOT EXISTS `kode_tiket` (`kode_tiket`)";
 
-$sqls = [$sql1, $sql2, $sql3, $sql4, $sql5, $sql6, $sql7, $sql8, $sql9, $sql10, $sql11, $sql12];
+$sql13 = "CREATE TABLE IF NOT EXISTS `bekuakun` (
+          `idBeku` varchar(11) NOT NULL
+        )";
+
+$sql14 = "CREATE TABLE IF NOT EXISTS `admin` (
+        `email_admin` varchar(255) NOT NULL,
+        `pass_admin` varchar(255) NOT NULL
+      )";
+
+$sql15 = "ALTER TABLE `admin`
+          ADD PRIMARY KEY IF NOT EXISTS (`email_admin`)";
+
+$sqls = [$sql1, $sql2, $sql3, $sql4, $sql5, $sql6, $sql7, $sql8, $sql9, $sql10, $sql11, $sql12,
+    $sql13, $sql14, $sql15];
 
 foreach($sqls as $k => $sql){
     $query = @$host->query($sql);

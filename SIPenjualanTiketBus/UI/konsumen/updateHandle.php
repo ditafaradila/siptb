@@ -1,6 +1,5 @@
 <?php 
     require '../../DB/conn.php';
-
     $id = $_POST['id'];
     $namaKonsumen = $_POST['namaKonsumen'];
     $emailKonsumen = $_POST['emailKonsumen'];
@@ -13,7 +12,6 @@
     $sql = "UPDATE konsumen SET namaKonsumen='$namaKonsumen', email='$emailKonsumen', jenisKelamin='$jk', tempatLahir='$tempatlahir', tanggalLahir='$tanggalLahir', alamat='$alamat', no_hp='$nohp', passwords='$passwords' WHERE no_ktp='$id'";
     $result = mysqli_query($host, $sql);
     if($result){
-        echo "<script>alert('Data berhasil diubah')</script>";
         header("Location: profile.php");
     }else{
         echo "<script>alert('Data gagal diubah')</script>";

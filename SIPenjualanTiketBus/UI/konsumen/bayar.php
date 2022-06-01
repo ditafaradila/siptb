@@ -1,4 +1,7 @@
-<?php require 'navbar.php'; ?>
+<?php 
+require 'navbar.php'; 
+session_start();
+?>
 <div align="center"><img src="../../Assets/siptbus.png" height="300"></div>
 
 <!-- <?php

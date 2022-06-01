@@ -34,8 +34,8 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = md5($_POST['pass']);
     
-    $sql = "SELECT * FROM admin WHERE email_admin='$email' AND pass_admin='$password';";
-    $result = mysqli_query($host, $sql);
+    $sqlA = "SELECT * FROM admins WHERE email_admin='$email' AND pass_admin='$password'";
+    $result = mysqli_query($host, $sqlA);
     if ($result > 0) {
         header("Location: beranda_sistem.php");
     } else {

@@ -2,7 +2,7 @@
 <?php require 'style_po.php'; ?>
 <body>
     <div class="container">
-        <form action="" method="POST" class="login-email">
+        <form action="login_po.php" method="POST" class="login-email">
             <p class="login-text" style="font-size: 2rem; font-weight: 800;">Login PO</p>
             <div class="input-group">
                 <input type="email" placeholder="Email" name="email" required>
@@ -25,13 +25,26 @@ require '../../DB/conn.php';
 require '../../DB/prep.php';
  
 if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
-    $idpo = md5($_POST['id_po']);
-    
-    $sql = "SELECT * FROM po WHERE email='$email' AND id_PO='$idpo'";
+    $emailpo = $_POST['email'];
+    $idpo = $_POST['id_po'];
+
+    $sql = "SELECT * FROM po WHERE email='$emailpo' AND id_PO='$idpo';";
     $result = mysqli_query($host, $sql);
-    if ($result > 0) {
-        header("Location: beranda_po.php");
+    $cek = mysqli_query($host, "SELECT * FROM bekuakun where idBeku='$idpo'");
+    if (mysqli_num_rows($result) > 0) {
+        if(mysqli_num_rows($cek) > 0){
+            echo "<script>alert('Akun Anda Terblokir Silahkan Hubungi Admin!');</script>";
+        } else {
+            while($row=mysqli_fetch_assoc($result)){
+                $_SESSION['namaPO'] = $row['namaPO'];
+                $_SESSION['emailPO'] = $row['email'];
+                $_SESSION['id_po'] = $row['id_PO'];
+                $_SESSION['alamatPO'] = $row['alamat'];
+                $_SESSION['no_hp'] = $row['no_hp'];
+                $_SESSION['namaArmada'] = $row['namaArmada'];
+            }
+            header("Location: beranda_po.php");
+        }
     } else {
         echo "<script>alert('Email atau ID PO Anda salah. Silahkan coba lagi!')</script>";
     }

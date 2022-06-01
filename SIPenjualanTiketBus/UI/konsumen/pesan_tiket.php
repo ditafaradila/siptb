@@ -1,4 +1,7 @@
-<?php require 'navbar.php'; ?>
+<?php 
+require 'navbar.php'; 
+session_start();
+?>
 <div align="center"><img src="../../Assets/siptbus.png" height="300"></div>
 
 <div align="center">
@@ -6,9 +9,18 @@
         Nomor Kursi
         <input type="text" name="nokur" placeholder="ex : 12B">
         Nomor KTP
-        <input type="text" name="noktp">
+        <input type="text" name="noktp" value="<?php echo $_SESSION['no_ktp'] ?>" readonly>
         Kode Jadwal
-        <input type="text" name="kojad">
+        <input list="listKojad" name="kojad">
+        <datalist id="listKojad">
+            <?php 
+            require '../../DB/conn.php';
+            $sql = mysqli_query($host, "SELECT * FROM jadwal");
+            while($row = mysqli_fetch_assoc($sql)){
+                echo "<option value='".$row['kode_jadwal']."'>";
+            }
+            ?>
+        </datalist>
         <br><br>
         <input type="submit" name="submit" value="Pesan">
     </form>

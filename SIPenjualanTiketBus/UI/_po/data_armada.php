@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<?php require 'navbar_po.php'; ?>
+<?php require 
+'navbar_po.php'; 
+session_start();
+?>
 <body>
   <div>
     <div class='alert alert-primary' role='alert' align='center'><h1> DATA ARMADA </h1></div>
@@ -20,7 +23,8 @@
 
       <?php 
         require '../../DB/conn.php';
-        $armada = mysqli_query($host, "SELECT * FROM armada");
+        $idpo = $_SESSION['id_po'];
+        $armada = mysqli_query($host, "SELECT * FROM armada WHERE id_PO = '$idpo'");
         while($d = mysqli_fetch_array($armada)){
       ?>
           <tr align="center">

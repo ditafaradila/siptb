@@ -31,19 +31,24 @@ if (isset($_POST['submitLogin'])) {
     
     $sql = "SELECT * FROM konsumen WHERE no_ktp='$noktp' AND passwords='$password'";
     $result = mysqli_query($host, $sql);
+    $cek = mysqli_query($host, "SELECT * FROM bekuakun where idBeku='$noktp'");
     if (mysqli_num_rows($result) > 0) {
-        while($row=mysqli_fetch_assoc($result)){
-            $_SESSION['nama'] = $row['namaKonsumen'];
-            $_SESSION['email'] = $row['email'];
-            $_SESSION['no_ktp'] = $row['no_ktp'];
-            $_SESSION['jk'] = $row['jenisKelamin'];
-            $_SESSION['tempatlahir'] = $row['tempatLahir'];
-            $_SESSION['tanggal'] = $row['tanggalLahir'];
-            $_SESSION['alamat'] = $row['alamat'];
-            $_SESSION['nohp'] = $row['no_hp'];
-            $_SESSION['passwords'] = $row['passwords'];
+        if(mysqli_num_rows($cek) > 0){
+            echo "<script>alert('Akun Anda Terblokir Silahkan Hubungi Admin!');</script>";
+        } else {
+            while($row=mysqli_fetch_assoc($result)){
+                $_SESSION['nama'] = $row['namaKonsumen'];
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['no_ktp'] = $row['no_ktp'];
+                $_SESSION['jk'] = $row['jenisKelamin'];
+                $_SESSION['tempatlahir'] = $row['tempatLahir'];
+                $_SESSION['tanggal'] = $row['tanggalLahir'];
+                $_SESSION['alamat'] = $row['alamat'];
+                $_SESSION['nohp'] = $row['no_hp'];
+                $_SESSION['passwords'] = $row['passwords'];
+            }
+            header("Location: beranda.php");
         }
-        header("Location: beranda.php");
     } else {
         echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
     }

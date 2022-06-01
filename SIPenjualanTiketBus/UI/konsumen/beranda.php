@@ -2,9 +2,6 @@
 <?php require 'navbar.php'; ?>
 <body>
     <div align="center"><img src="../../Assets/siptbus.png" height="300"></div>
-    <form action='cari.php' method='post'>
-      <input class='btn btn-success' type='submit' value='Cari Tiket'>
-    </form>
 </body>
 </html>
 

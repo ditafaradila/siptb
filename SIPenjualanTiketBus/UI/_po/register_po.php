@@ -3,7 +3,7 @@
 <html>
 <body>
     <div class="container">
-        <form action="login.php" method="POST" class="login-email">
+        <form action="register_po.php" method="POST" class="login-email">
             <p class="login-text" style="font-size: 2rem; font-weight: 800;">Register PO</p>
             <div class="input-group">
                 <input type="text" placeholder="Nama" name="namaPO" required>
@@ -40,8 +40,12 @@ if(isset($_POST['submit'])){
     $nohp=$_POST['no_hp'];
     $namaArmada=$_POST['namaArmada'];
 
-    $ins = mysqli_query($host, "insert into po value('', '$nama', '$email', '$alamat', '$nohp', '$namaArmada')");
-    echo"Akun berhasil dibuat!";
-    header("location: login_po.php");
+    $cek = mysqli_query($host, "SELECT * FROM po WHERE email='$email'");
+    if(mysqli_num_rows($cek)>0){
+        echo "<script>alert('Email sudah terdaftar!')</script>";
+    }else{
+        $ins = mysqli_query($host, "insert into po value('', '$nama', '$email', '$alamat', '$nohp', '$namaArmada')");
+        header("location: login_po.php");
+    }
 }
 ?>

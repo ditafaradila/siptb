@@ -3,7 +3,7 @@
 <html>
 <body>
     <div class="container">
-        <form action="login.php" method="POST" class="login-email">
+        <form action="register.php" method="POST" class="login-email">
             <p class="login-text" style="font-size: 2rem; font-weight: 800;">Register Konsumen</p>
             <div class="input-group">
                 <input type="text" placeholder="Nama" name="nama" required>
@@ -15,7 +15,11 @@
                 <input type="text" placeholder="Nomor KTP" name="noktp" required>
             </div>
             <div class="input-group">
-                <input type="text" placeholder="Kelamin" name="jk" required>
+                <input list="list_jk" placeholder="Kelamin" name="jk" required >
+                <datalist id="list_jk">
+                    <option value="Laki-Laki">
+                    <option value="Perempuan">
+                </datalist>
             </div>
             <div class="input-group">
                 <input type="text" placeholder="Tempat Lahir" name="tempatlahir" required>
@@ -54,9 +58,13 @@ if(isset($_POST['submit'])){
     $noktp=$_POST['noktp'];
     $alamat=$_POST['alamat'];
     $nohp=$_POST['nohp'];
-    $ins = mysqli_query($host, "insert into konsumen value('$passwords', '$nama', '$email', '$jk', '$tempatlahir',
-    '$tanggal', '$noktp', '$alamat', '$nohp')");
-    echo"Akun berhasil dibuat!";
-    header("location: login.php");
+    $cek = mysqli_query($host, "SELECT * FROM konsumen WHERE no_ktp='$noktp'");
+    if(mysqli_num_rows($cek)>0){
+        echo "<script>alert('Nomor KTP sudah terdaftar')</script>";
+    } else {
+        $ins = mysqli_query($host, "insert into konsumen value('$passwords', '$nama', '$email', '$jk', '$tempatlahir',
+        '$tanggal', '$noktp', '$alamat', '$nohp')");
+        header("location: login.php");
+    }
 }
 ?>

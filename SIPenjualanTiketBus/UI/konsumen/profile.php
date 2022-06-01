@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<?php session_start(); ?>
+<?php 
+session_start(); 
+require 'updateSession.php';
+?>
 <html lang="en">
 
 <head>
