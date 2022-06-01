@@ -1,64 +1,136 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+<!DOCTYPE html>
+<?php session_start(); ?>
+<html lang="en">
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-<?php require 'navbar_konsumen.php'; ?>
-<div align="center"><img src="../../Assets/siptbus.png" height="300"></div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="../../Assets/unila.ico" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <title>Konsumen Holder</title>
 
-<div align="center">
-    <form action="profile.php" method="post">
-      Masukkan Nomor KTP anda :
-        <br>            
-        <input type="text" name="noktp">
-        <br>
-      Masukkan Passwords akun anda :
-        <br>
-        <input type="password" name="passwords">
-        <br><br>
-        <input class="btn btn-primary" type="submit" value="Cari">
-        <br>
-        atau
-    </form>
-    <form action="buat.php" method="post">
-      <input class="btn btn-success" type="submit" value="Buat Akun">
-    </form>
+  <!-- Font Awesome if you need it
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  -->
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/> 
+  <!--Replace with your tailwind.css once created-->
+
+</head>
+<body class="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover" style="background-image:url('https://source.unsplash.com/1L71sPT5XKc');">
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+    <nav class="navbar navbar-expand-lg" style="background-color: #F4EEB1;">
+        <a class="navbar-brand" href="beranda.php">Beranda</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link active" href="cari.php">Cari Tiket</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link active" href="pesan_tiket.php">Pesan Tiket</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="bayar.php">Bayar Tiket</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="profile.php">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="../../logout.php">Logout</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+
+  <div class="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+    
+	<!--Main Col-->
+	<div id="profile" class="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg:mx-0">
+	
+
+		<div class="p-4 md:p-12 text-center lg:text-left">
+			<!-- Image for mobile view-->
+			<div class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center" style="background-image: url('https://source.unsplash.com/MP0IUfwrn0A')"></div> <!--url('../../Assets/user.png')-->
+			
+			<h1 class="text-3xl font-bold pt-8 lg:pt-0"><?php echo $_SESSION['nama'];?></h1>
+			<div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25"></div>
+			<p class="pt-4 text-base font-bold flex items-center justify-center lg:justify-start"><svg class="h-4 fill-current text-green-700 pr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9 12H1v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-8v2H9v-2zm0-1H0V5c0-1.1.9-2 2-2h4V2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1h4a2 2 0 0 1 2 2v6h-9V9H9v2zm3-8V2H8v1h4z"/></svg> <?php echo $_SESSION['tempatlahir']; echo ', '; echo $_SESSION['tanggal']; ?> </p>
+			<p class="pt-2 text-gray-600 text-xs lg:text-sm flex items-center justify-center lg:justify-start"><svg class="h-4 fill-current text-green-700 pr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm7.75-8a8.01 8.01 0 0 0 0-4h-3.82a28.81 28.81 0 0 1 0 4h3.82zm-.82 2h-3.22a14.44 14.44 0 0 1-.95 3.51A8.03 8.03 0 0 0 16.93 14zm-8.85-2h3.84a24.61 24.61 0 0 0 0-4H8.08a24.61 24.61 0 0 0 0 4zm.25 2c.41 2.4 1.13 4 1.67 4s1.26-1.6 1.67-4H8.33zm-6.08-2h3.82a28.81 28.81 0 0 1 0-4H2.25a8.01 8.01 0 0 0 0 4zm.82 2a8.03 8.03 0 0 0 4.17 3.51c-.42-.96-.74-2.16-.95-3.51H3.07zm13.86-8a8.03 8.03 0 0 0-4.17-3.51c.42.96.74 2.16.95 3.51h3.22zm-8.6 0h3.34c-.41-2.4-1.13-4-1.67-4S8.74 3.6 8.33 6zM3.07 6h3.22c.2-1.35.53-2.55.95-3.51A8.03 8.03 0 0 0 3.07 6z"/></svg> Your Location - <?php echo $_SESSION['alamat']; ?> </p>
+			<p class="pt-8 text-sm" align="left">Your Gender &nbsp;&nbsp;&nbsp;: <?php echo $_SESSION['jk']; ?> <br> Phone Number: <?php echo $_SESSION['nohp']; ?></p>
+
+			<div class="pt-12 pb-8">
+				<button class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full" onclick="location.href='update.php';">
+				  Update Profile
+				</button> 
+			</div>
+			
+			<!-- Use https://simpleicons.org/ to find the svg for your preferred product --> 
+
+		</div>
+
+	</div>
+	
+	<!--Img Col-->
+	<div class="w-full lg:w-2/5">
+		<!-- Big profile image for side bar (desktop) -->
+		<img src="https://source.unsplash.com/MP0IUfwrn0A" class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block">
+		<!-- Image from: http://unsplash.com/photos/MP0IUfwrn0A -->
+		
+	</div>
+	
+	
+	<!-- Pin to top right corner -->
+	  <div class="absolute top-0 right-0 h-12 w-18 p-4">
+		<button class="js-change-theme focus:outline-none">🌙</button>
+	  </div>
+
 </div>
 
-<?php
-$host=mysqli_connect("localhost","root","","siptb");
-$noktp=$_POST['noktp'];
-$passwords=$_POST['passwords'];
+	<script src="https://unpkg.com/popper.js@1/dist/umd/popper.min.js"></script>
+	<script src="https://unpkg.com/tippy.js@4"></script>
+	<script>
+		//Init tooltips
+		tippy('.link',{
+		  placement: 'bottom'
+		})
 
-$profil = mysqli_query($host, "select * from konsumen where passwords = '$passwords'");
+		//Toggle mode
+		const toggle = document.querySelector('.js-change-theme');
+		const body = document.querySelector('body');
+		const profile = document.getElementById('profile');
+		
+		
+		toggle.addEventListener('click', () => {
 
-echo "<table class='table'>";
-echo "<thead class='thead-dark'>
-      <tr align='center'>
-        <th>Nama Konsumen</th>
-        <th>Email</th>
-        <th>Jenis Kelamin</th>
-        <th>Tempat Lahir</th>
-        <th>Tanggal Lahir</th>
-        <th>Nomor KTP</th>
-        <th>Alamat</th>
-        <th>Nomor HP</th>
-      </tr>
-      </thead>";
-while($row=mysqli_fetch_assoc($profil)){
-    echo "<tr align='center'>
-            <td>".$row['namaKonsumen']."</td>
-            <td>".$row['email']."</td>
-            <td>".$row['jenisKelamin']."</td>
-            <td>".$row['tempatLahir']."</td>
-            <td>".$row['tanggalLahir']."</td>
-            <td>".$row['no_ktp']."</td>
-            <td>".$row['alamat']."</td>
-            <td>".$row['no_hp']."</td>
-            </tr>";
-    echo "<br>";
-}
-echo "</table>";
+		  if (body.classList.contains('text-gray-900')) {
+			toggle.innerHTML = "☀️";
+			body.classList.remove('text-gray-900');
+			body.classList.add('text-gray-100');
+			profile.classList.remove('bg-white');
+			profile.classList.add('bg-gray-900');
+		  } else
+		  {
+			toggle.innerHTML = "🌙";
+			body.classList.remove('text-gray-100');
+			body.classList.add('text-gray-900');
+			profile.classList.remove('bg-gray-900');			
+			profile.classList.add('bg-white');
+			
+		  }
+		});
+		
+    </script>
+	
+</body>
 
-?>
+</html>

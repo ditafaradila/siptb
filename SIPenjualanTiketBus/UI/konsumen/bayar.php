@@ -1,37 +1,13 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-<?php require 'navbar_konsumen.php'; ?>
-
+<?php require 'navbar.php'; ?>
 <div align="center"><img src="../../Assets/siptbus.png" height="300"></div>
 
-<?php
+<!-- <?php
+session_start();
 require '../../DB/conn.php';
-
+$id = $_SESSION['no_ktp'];
 $tiket = mysqli_query($host, "SELECT tiket.kode_tiket, konsumen.namaKonsumen, jadwal.kotaAsal,
- jadwal.kotaTujuan, konsumen.no_hp, jadwal.tanggalBerangkat, jadwal.jamBerangkat, tiket.no_kursi,
-  jadwal.no_armada, jadwal.harga FROM tiket, konsumen, jadwal WHERE jadwal.kodeJadwal
-   = tiket.kode_jadwal AND konsumen.no_ktp = tiket.no_ktp;");
-
-echo "<div class='alert alert-primary' role='alert' align='center'><h1> Pemesanan Tiket Bus </h1></div>";
-echo "<table class='table'>";
-echo "<thead class='thead-dark'>
-      <tr align='center'>
-        <th>Kode Tiket</th>
-        <th>Nama</th>
-        <th>Kota Asal</th>
-        <th>Kota Tujuan</th>
-        <th>Nomor Hp</th>
-        <th>Tanggal Berangkat</th>
-        <th>Jam Berangkat</th>
-        <th>Harga</th>
-        <th>Nomor Kursi</th>
-        <th>Nomor Armada</th>
-      </tr>
-      </thead>";
+ jadwal.kotaTujuan, konsumen.no_hp, jadwal.tanggalBerangkat, jadwal.jamBerangkat, jadwal.harga, tiket.no_kursi,
+  jadwal.no_armada FROM tiket, konsumen, jadwal WHERE konsumen.no_ktp = '$id'");
 
 while($row=mysqli_fetch_assoc($tiket)){
     echo "<tr align='center'>
@@ -49,7 +25,7 @@ while($row=mysqli_fetch_assoc($tiket)){
     echo "<br>";
 }
 echo "</table>";
-?>
+?> -->
 
 <div class="alert alert-success" role="alert"  align="center">
   <h1>Pembayaran Tiket Bus</h1>
@@ -92,6 +68,7 @@ echo "</table>";
 
 <?php
 require '../../DB/conn.php';
+error_reporting(0);
 $kotik=$_POST['kotik'];
 $tglbyr=$_POST['tglbyr'];
 $status=$_POST['status'];

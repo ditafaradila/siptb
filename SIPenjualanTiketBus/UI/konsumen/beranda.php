@@ -1,39 +1,41 @@
 <!DOCTYPE html>
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-</head>
+<?php require 'navbar.php'; ?>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-    <?php require 'navbar_konsumen.php'; ?>
-
     <div align="center"><img src="../../Assets/siptbus.png" height="300"></div>
-    <div >
-      <h1 align="center">Cari Tiket</h1>
-    </div>
-    <div align="center">
-      <form action="cari.php" method="post">
-          Tanggal Berangkat
-          <br>            
-          <input type="date" name="tanggal">
-          <br>
-          Kota Asal
-          <br>       
-          <input type="text" name="asal">
-          <br>
-          Kota Tujuan
-          <br>    
-          <input type="text" name="tujuan">
-          <br>
-          <br>
-          <input type="submit" value="cari">
-      </form>
-    </div>
+    <form action='cari.php' method='post'>
+      <input class='btn btn-success' type='submit' value='Cari Tiket'>
+    </form>
 </body>
 </html>
 
+<table table class="table">
+<thead class="thead-dark">
+<tr align="center">
+  <th>Kode</th>
+  <th>Nama Armada</th>
+  <th>Tanggal Berangkat</th>
+  <th>Kota Asal</th>
+  <th>Kota Tujuan</th>
+  <th>Jam Berangkat</th>
+  <th>Harga</th>
+  <th>Nomor Armada</th>
+</tr>
 <?php
-require '../../DB/prep.php';
+  error_reporting(0);
+  require '../../DB/conn.php';
+  $info = mysqli_query($host, "select * from jadwal order by tanggalBerangkat asc");
+  while($row=mysqli_fetch_assoc($info)){
+      echo "<tr align='center'>
+                <td>".$row['kodeJadwal']."</td>
+                <td>".$row['namaArmada']."</td>
+                <td>".$row['tanggalBerangkat']."</td>
+                <td>".$row['kotaAsal']."</td>
+                <td>".$row['kotaTujuan']."</td>
+                <td>".$row['jamBerangkat']."</td>
+                <td>".$row['harga']."</td>
+                <td>".$row['no_armada']."</td>
+              </tr>";
+      echo "<br>";
+  }
+  echo "</table>";
 ?>

@@ -1,45 +1,17 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <link rel="shortcut icon" href="Assets/unila.ico" />
-    <link rel="stylesheet" media="screen" href="CSS/style.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <title>Siptibus</title>
+    <link rel="shortcut icon" href="Assets/unila.ico"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SI Penjualan Tiket Bus</title>
+    <link rel="stylesheet" media="screen" href="CSS/style.css" />
 </head>
 
 <body>
-    <div class="alert alert-primary" role="alert">
-        <h1 align="center">Login Siptibus sebagai</h1>
-    </div>
-    <br>
-    <div class="card-group">
-        <div class="card">
-          <img src="Assets/user.png" class="card-img-top" alt="user">
-          <div class="card-body">
-            <h5 class="card-title">KONSUMEN</h5>
-            <p class="card-text">Masuk dan nikmati fitur-fitur pemesanan tiket bus dengan lebih mudah</p>
-            <a href="UI/konsumen/beranda.php" class="btn btn-primary">Masuk</a>
-          </div>
-        </div>
-        <div class="card">
-          <img src="Assets/bus.png" class="card-img-top" alt="po bus">
-          <div class="card-body">
-            <h5 class="card-title">PO BUS</h5>
-            <p class="card-text">Masuk dan nikmati fitur-fitur pemesanan tiket bus dengan lebih mudah</p>
-            <a href="UI/_po/beranda_po.php" class="btn btn-primary">Masuk</a>
-          </div>
-        </div>
-        <div class="card">
-          <img src="Assets/admin.png" class="card-img-top" alt="admin sistem">
-          <div class="card-body">
-            <h5 class="card-title">Admin Sistem</h5>
-            <p class="card-text">Masuk dan nikmati fitur-fitur pemesanan tiket bus dengan lebih mudah</p>
-            <a href="UI//konsumen/beranda.php" class="btn btn-primary">Masuk</a>
-          </div>
-        </div>
-      </div>
+    <h1> Which User are You? <br>
+        <button onclick="window.location.href='UI/konsumen/login.php'">Customer</button>
+        <button onclick="window.location.href='UI/admin/login_admin.php'">Admin</button>
+        <button onclick="window.location.href='UI/_po/login_po.php'">PO</button>
+    </h1>
 </body>
 </html>

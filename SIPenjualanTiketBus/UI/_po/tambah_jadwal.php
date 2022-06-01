@@ -1,40 +1,6 @@
 <!DOCTYPE html>
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-</head>
+<?php require 'navbar_po.php'; ?>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-
-    <nav class="navbar navbar-expand-lg" style="background-color: #F4EEB1;">
-        <img src="pngegg.png" height="80">
-        <a class="navbar-brand" href="beranda_po.php">Beranda</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link active" href="data_transaksi.php">Data Transaksi</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="data_jadwal.php">Jadwal Bus</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="data_armada.php">Data Armada</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="profile_po.php">Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="login.html">Logout</a>
-            </li>
-          </ul>
-        </div>
-    </nav>
-
     <div>
     <h2 align="center">Tambah Jadwal</h2>
     <form action="tambah_jadwal.php" method="POST">
@@ -54,15 +20,17 @@
 </html>
 
 <?php
-$host=mysqli_connect("localhost","root","","siptb");
+require '../../DB/conn.php';
+if(isset($_POST['submit'])){
+    $namaArmada=$_POST['namaArmada'];
+    $tanggalBerangkat=$_POST['tanggalBerangkat'];
+    $kotaAsal=$_POST['kotaAsal'];
+    $kotaTujuan=$_POST['kotaTujuan'];
+    $jamBerangkat=$_POST['jamBerangkat'];
+    $no_armada=$_POST['no_armada'];
+    $harga=$_POST['harga'];
 
-$namaArmada=$_POST['namaArmada'];
-$tanggalBerangkat=$_POST['tanggalBerangkat'];
-$kotaAsal=$_POST['kotaAsal'];
-$kotaTujuan=$_POST['kotaTujuan'];
-$jamBerangkat=$_POST['jamBerangkat'];
-$no_armada=$_POST['no_armada'];
-$harga=$_POST['harga'];
-
-mysqli_query($host, "insert into jadwal value('', '$namaArmada', '$tanggalBerangkat', '$kotaAsal', '$kotaTujuan', '$jamBerangkat', '$no_armada', '$harga')");
+    mysqli_query($host, "insert into jadwal value('', '$namaArmada', '$tanggalBerangkat', '$kotaAsal', '$kotaTujuan', '$jamBerangkat', '$no_armada', '$harga')");
+    header("Location: data_jadwal.php");
+}
 ?>
